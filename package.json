@@ -1,5 +1,8 @@
 {
     "type": "module",
+    "prisma": {
+        "seed": "tsx prisma/seed.ts"
+    },
     "scripts": {
         "build": "tsc",
         "dev": "tsx watch src/index.ts",
