@@ -5,7 +5,7 @@ import globals from "globals";
 export default [
     js.configs.recommended,
     ...tseslint.configs.recommended,
-    { rules: { "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }] } },
+    { rules: { "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_", varsIgnorePattern: "^_" }] } },
     { languageOptions: { globals: { ...globals.node } } },
     { ignores: ["dist"] },
 ];
