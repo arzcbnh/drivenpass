@@ -1,5 +1,5 @@
 import { User } from "@prisma/client";
 
 export type PublicUser = Omit<User, "passwordHash">;
-export type SignInForm = Pick<User, "name" | "email">;
-export type SignUpForm = SignInForm & { password: string };
+export type SignUpForm = Pick<User, "name" | "email"> & { password: string };
+export type SignInForm = Omit<SignUpForm, "name">;
