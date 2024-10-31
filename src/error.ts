@@ -6,7 +6,7 @@ export class ConflictError extends Error {
 
 export class UserAlreadyExistsError extends ConflictError {
     constructor(email: string) {
-        super(`Email ${email} already registered.`);
+        super(`Email '${email}' already registered.`);
     }
 }
 
