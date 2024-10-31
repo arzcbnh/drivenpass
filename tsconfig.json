@@ -12,6 +12,7 @@
             "#controllers": ["controllers/index.js"],
             "#error": ["error.js"],
             "#middleware": ["middleware/index.js"],
+            "#protocols": ["protocols/index.js"],
             "#repositories": ["repositories/index.js"],
             "#routes": ["routes/index.js"],
             "#schemas": ["schemas/index.js"],
