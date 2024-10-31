@@ -28,7 +28,9 @@ async function signIn({ email, password }: SignInForm) {
         throw new WrongPasswordError();
     }
 
-    return jwt.sign({ email, name: user.name }, key);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { passwordHash, ...payload } = user;
+    return jwt.sign(payload, key);
 }
 
 export const UserService = {
