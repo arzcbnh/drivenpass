@@ -9,7 +9,13 @@
         "skipLibCheck": true,
         "baseUrl": "./src",
         "paths": {
-            "#routes": ["routes/index.js"]
+            "#controllers": ["controllers/index.js"],
+            "#error": ["error.js"],
+            "#middleware": ["middleware/index.js"],
+            "#repositories": ["repositories/index.js"],
+            "#routes": ["routes/index.js"],
+            "#schemas": ["schemas/index.js"],
+            "#services": ["services/index.js"]
         }
     }
 }
