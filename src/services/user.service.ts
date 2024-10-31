@@ -1,11 +1,7 @@
 import { EmailNotFoundError, UserAlreadyExistsError, WrongPasswordError } from "#error";
 import { SignInForm, SignUpForm } from "#protocols";
 import { UserRepository } from "#repositories";
-import jwt from "jsonwebtoken";
-import Cryptr from "cryptr";
-
-const key = process.env.CRYPTO_KEY!;
-const cryptr = new Cryptr(key);
+import { EncryptionService } from "./encryption.service.js";
 
 async function signUp({ name, email, password }: SignUpForm) {
     const user = await getByEmail(email);
@@ -14,7 +10,8 @@ async function signUp({ name, email, password }: SignUpForm) {
         throw new UserAlreadyExistsError(email);
     }
 
-    return UserRepository.createUser({ name, email, passwordHash: cryptr.encrypt(password) });
+    const passwordHash = EncryptionService.encrypt(password);
+    return UserRepository.createUser({ name, email, passwordHash });
 }
 
 async function signIn({ email, password }: SignInForm) {
@@ -24,13 +21,13 @@ async function signIn({ email, password }: SignInForm) {
         throw new EmailNotFoundError(email);
     }
 
-    if (password != cryptr.decrypt(user.passwordHash)) {
+    if (password != EncryptionService.decrypt(user.passwordHash)) {
         throw new WrongPasswordError();
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { passwordHash, ...payload } = user;
-    return jwt.sign(payload, key);
+    return EncryptionService.makeToken(payload);
 }
 
 function getByEmail(email: string) {
@@ -40,5 +37,5 @@ function getByEmail(email: string) {
 export const UserService = {
     signUp,
     signIn,
-    getByEmail
+    getByEmail,
 };
