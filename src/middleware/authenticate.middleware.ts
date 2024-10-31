@@ -15,7 +15,7 @@ function getToken(req: Request) {
 export async function authenticate(req: Request, res: Response, next: NextFunction) {
     const token = getToken(req);
     const user = jwt.verify(token, key) as PublicUser;
-    const { passwordHash } = (await UserService.getByEmail(user.email))!;
-    res.locals.user = { ...user, password: cryptr.decrypt(passwordHash) }
+    const { passwordHash, id } = (await UserService.getByEmail(user.email))!;
+    res.locals.user = { ...user, id, password: cryptr.decrypt(passwordHash) }
     next();
 }
