@@ -8,7 +8,7 @@ const key = process.env.CRYPTO_KEY!;
 const cryptr = new Cryptr(key);
 
 async function signUp({ name, email, password }: SignUpForm) {
-    const user = await UserRepository.readByEmail(email);
+    const user = await getByEmail(email);
 
     if (user != null) {
         throw new UserAlreadyExistsError(email);
@@ -18,7 +18,7 @@ async function signUp({ name, email, password }: SignUpForm) {
 }
 
 async function signIn({ email, password }: SignInForm) {
-    const user = await UserRepository.readByEmail(email);
+    const user = await getByEmail(email);
 
     if (user == null) {
         throw new EmailNotFoundError(email);
@@ -33,7 +33,12 @@ async function signIn({ email, password }: SignInForm) {
     return jwt.sign(payload, key);
 }
 
+function getByEmail(email: string) {
+    return UserRepository.readByEmail(email);
+}
+
 export const UserService = {
     signUp,
     signIn,
+    getByEmail
 };
