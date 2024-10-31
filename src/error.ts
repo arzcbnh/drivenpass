@@ -10,6 +10,12 @@ export class UserAlreadyExistsError extends ConflictError {
     }
 }
 
+export class CredentialAlreadyExistsError extends ConflictError {
+    constructor(title: string) {
+        super(`Credential with title '${title}' already exists.`);
+    }
+}
+
 export class NotFoundError extends Error {
     constructor(message: string) {
         super(message);
