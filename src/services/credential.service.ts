@@ -16,6 +16,18 @@ async function createCredential(userId: number, form: CredentialForm) {
     return CredentialRepository.createCredential({ ...data, passwordHash, userId });
 }
 
+async function getAllCredentials(userId: number) {
+    const credentials = await CredentialRepository.readByUserId(userId);
+    return credentials;
+}
+
+async function getCredential(userId: number, id: number) {
+    const credential = await CredentialRepository.readById(userId, id);
+    return credential;
+}
+
 export const CredentialService = {
     createCredential,
+    getAllCredentials,
+    getCredential,
 };

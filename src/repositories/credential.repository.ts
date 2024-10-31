@@ -11,11 +11,25 @@ function readByTitle(userId: number, title: string) {
     });
 }
 
+function readByUserId(userId: number) {
+    return credential.findMany({
+        where: { userId },
+    });
+}
+
+function readById(userId: number, id: number) {
+    return credential.findMany({
+        where: { userId, id },
+    });
+}
+
 function createCredential(data: CredentialCreate) {
     return credential.create({ data });
 }
 
 export const CredentialRepository = {
     readByTitle,
+    readByUserId,
+    readById,
     createCredential,
 };

@@ -10,6 +10,21 @@ async function postCredential(req: Request, res: Response) {
     res.sendStatus(httpStatus.CREATED);
 }
 
+async function getAllCredentials(_: Request, res: Response) {
+    const user = res.locals.user as PublicUser;
+    const credentials = await CredentialService.getAllCredentials(user.id);
+    res.send(credentials);
+}
+
+async function getCredential(req: Request, res: Response) {
+    const id = Number(req.params.id);
+    const user = res.locals.user as PublicUser;
+    const credential = await CredentialService.getCredential(user.id, id);
+    res.send(credential);
+}
+
 export const CredentialController = {
     postCredential,
+    getAllCredentials,
+    getCredential,
 };
