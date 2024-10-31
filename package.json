@@ -15,6 +15,7 @@
         "#controllers": "./dist/controllers/index.js",
         "#error": "./dist/error.js",
         "#middleware": "./dist/middleware/index.js",
+        "#protocols": "./dist/protocols/index.js",
         "#repositories": "./dist/repositories/index.js",
         "#routes": "./dist/routes/index.js",
         "#schemas": "./dist/schemas/index.js",
