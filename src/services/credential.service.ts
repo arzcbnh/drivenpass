@@ -13,9 +13,9 @@ async function createCredential(userId: number, form: CredentialForm) {
     const { password, ...data } = form;
     const passwordHash = EncryptionService.encrypt(password);
 
-    return CredentialRepository.createCredential({...data, passwordHash, userId})
+    return CredentialRepository.createCredential({ ...data, passwordHash, userId });
 }
 
 export const CredentialService = {
-    createCredential
-}
+    createCredential,
+};
