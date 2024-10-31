@@ -1,10 +1,10 @@
 import { CredentialAlreadyExistsError } from "#error";
-import { CompleteUser, CredentialForm } from "#protocols";
+import { CredentialForm } from "#protocols";
 import { CredentialRepository } from "#repositories";
 import { EncryptionService } from "./encryption.service.js";
 
-async function createCredential(user: CompleteUser, form: CredentialForm) {
-    const credential = await CredentialRepository.readByTitle(user.id, form.title);
+async function createCredential(userId: number, form: CredentialForm) {
+    const credential = await CredentialRepository.readByTitle(userId, form.title);
 
     if (credential != null) {
         throw new CredentialAlreadyExistsError(form.title);
@@ -13,7 +13,7 @@ async function createCredential(user: CompleteUser, form: CredentialForm) {
     const { password, ...data } = form;
     const passwordHash = EncryptionService.encrypt(password);
 
-    return CredentialRepository.createCredential({...data, passwordHash, userId: user.id})
+    return CredentialRepository.createCredential({...data, passwordHash, userId})
 }
 
 export const CredentialService = {

@@ -1,7 +1,7 @@
 import { Credential } from "@prisma/client";
 import { db } from "./database.js";
 
-type CredentialCreate = Omit<Credential, "id">
+type CredentialCreate = Omit<Credential, "id">;
 
 const { credential } = db;
 
@@ -12,10 +12,10 @@ function readByTitle(userId: number, title: string) {
 }
 
 function createCredential(data: CredentialCreate) {
-    return credential.create({data})
+    return credential.create({ data });
 }
 
 export const CredentialRepository = {
     readByTitle,
-    createCredential
+    createCredential,
 };
