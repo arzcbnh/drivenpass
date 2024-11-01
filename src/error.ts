@@ -30,7 +30,7 @@ export class EmailNotFoundError extends NotFoundError {
 
 export class CredentialNotFoundError extends NotFoundError {
     constructor(id: number) {
-        super(`Credential with ID '${id} not found.`);
+        super(`Credential with ID '${id}' not found.`);
     }
 }
 
