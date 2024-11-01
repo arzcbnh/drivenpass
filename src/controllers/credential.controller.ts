@@ -31,9 +31,17 @@ async function putCredential(req: Request, res: Response) {
     res.sendStatus(httpStatus.CREATED);
 }
 
+async function deleteCredential(req: Request, res: Response) {
+    const user = res.locals.user as PublicUser;
+    const id = Number(req.params.id);
+    await CredentialService.deleteCredential(user.id, id);
+    res.sendStatus(httpStatus.NO_CONTENT);
+}
+
 export const CredentialController = {
     postCredential,
     getAllCredentials,
     getCredential,
     putCredential,
+    deleteCredential,
 };

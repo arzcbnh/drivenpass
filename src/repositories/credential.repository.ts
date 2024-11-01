@@ -34,10 +34,17 @@ function update(id: number, data: CredentialCreate) {
     });
 }
 
+function deleteById(id: number) {
+    return credential.delete({
+        where: { id },
+    });
+}
+
 export const CredentialRepository = {
     readByTitle,
     readByUserId,
     readById,
     createCredential,
     update,
+    deleteById,
 };

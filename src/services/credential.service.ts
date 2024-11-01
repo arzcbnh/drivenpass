@@ -39,9 +39,20 @@ async function editCredential(id: number, userId: number, form: CredentialForm) 
     return CredentialRepository.update(id, { ...data, passwordHash, userId });
 }
 
+async function deleteCredential(userId: number, id: number) {
+    const credential = await CredentialRepository.readById(userId, id);
+
+    if (credential == null) {
+        throw new CredentialNotFoundError(id);
+    }
+
+    return CredentialRepository.deleteById(id);
+}
+
 export const CredentialService = {
     createCredential,
     getAllCredentials,
     getCredential,
     editCredential,
+    deleteCredential,
 };
