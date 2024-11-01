@@ -23,8 +23,17 @@ async function getCredential(req: Request, res: Response) {
     res.send(credential);
 }
 
+async function putCredential(req: Request, res: Response) {
+    const form = req.body as CredentialForm;
+    const user = res.locals.user as PublicUser;
+    const id = Number(req.params.id);
+    await CredentialService.editCredential(id, user.id, form);
+    res.sendStatus(httpStatus.CREATED);
+}
+
 export const CredentialController = {
     postCredential,
     getAllCredentials,
     getCredential,
+    putCredential,
 };

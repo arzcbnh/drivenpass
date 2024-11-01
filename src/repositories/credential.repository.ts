@@ -27,9 +27,17 @@ function createCredential(data: CredentialCreate) {
     return credential.create({ data });
 }
 
+function update(id: number, data: CredentialCreate) {
+    return credential.update({
+        where: { id },
+        data,
+    });
+}
+
 export const CredentialRepository = {
     readByTitle,
     readByUserId,
     readById,
     createCredential,
+    update,
 };
