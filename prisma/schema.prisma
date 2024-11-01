@@ -28,5 +28,5 @@ model Credential {
   username     String
   passwordHash String
   User         User?  @relation(fields: [userId], references: [id])
-  userId       Int?
+  userId       Int
 }
