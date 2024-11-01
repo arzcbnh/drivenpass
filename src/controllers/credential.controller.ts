@@ -19,6 +19,11 @@ async function getAllCredentials(_: Request, res: Response) {
 async function getCredential(req: Request, res: Response) {
     const id = Number(req.params.id);
     const user = res.locals.user as PublicUser;
+
+    if (isNaN(id)) {
+        return void res.sendStatus(httpStatus.BAD_REQUEST);
+    }
+
     const credential = await CredentialService.getCredential(user.id, id);
 
     if (credential[0] == null) {
@@ -32,6 +37,11 @@ async function putCredential(req: Request, res: Response) {
     const form = req.body as CredentialForm;
     const user = res.locals.user as PublicUser;
     const id = Number(req.params.id);
+
+    if (isNaN(id)) {
+        return void res.sendStatus(httpStatus.BAD_REQUEST);
+    }
+
     await CredentialService.editCredential(id, user.id, form);
     res.sendStatus(httpStatus.NO_CONTENT);
 }
@@ -39,6 +49,11 @@ async function putCredential(req: Request, res: Response) {
 async function deleteCredential(req: Request, res: Response) {
     const user = res.locals.user as PublicUser;
     const id = Number(req.params.id);
+
+    if (isNaN(id)) {
+        return void res.sendStatus(httpStatus.BAD_REQUEST);
+    }
+
     await CredentialService.deleteCredential(user.id, id);
     res.sendStatus(httpStatus.NO_CONTENT);
 }
