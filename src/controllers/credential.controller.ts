@@ -24,7 +24,7 @@ async function getCredential(req: Request, res: Response) {
     if (credential[0] == null) {
         res.sendStatus(httpStatus.NOT_FOUND);
     } else {
-        res.send(credential);
+        res.send(credential[0]);
     }
 }
 
