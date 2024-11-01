@@ -40,6 +40,12 @@ function deleteById(id: number) {
     });
 }
 
+function deleteAll(userId: number) {
+    return credential.deleteMany({
+        where: { userId },
+    });
+}
+
 export const CredentialRepository = {
     readByTitle,
     readByUserId,
@@ -47,4 +53,5 @@ export const CredentialRepository = {
     createCredential,
     update,
     deleteById,
+    deleteAll,
 };

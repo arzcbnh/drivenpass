@@ -33,8 +33,13 @@ function getByEmail(email: string) {
     return UserRepository.readByEmail(email);
 }
 
+function deleteUser(id: number) {
+    return UserRepository.deleteUser(id);
+}
+
 export const UserService = {
     signUp,
     signIn,
     getByEmail,
+    deleteUser,
 };

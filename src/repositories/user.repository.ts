@@ -15,7 +15,12 @@ function createUser(data: UserCreate) {
     return user.create({ data });
 }
 
+function deleteUser(id: number) {
+    return user.delete({ where: { id } });
+}
+
 export const UserRepository = {
     readByEmail,
     createUser,
+    deleteUser,
 };

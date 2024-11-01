@@ -49,10 +49,15 @@ async function deleteCredential(userId: number, id: number) {
     return CredentialRepository.deleteById(id);
 }
 
+async function deleteAll(userId: number) {
+    return CredentialRepository.deleteAll(userId);
+}
+
 export const CredentialService = {
     createCredential,
     getAllCredentials,
     getCredential,
     editCredential,
     deleteCredential,
+    deleteAll,
 };
