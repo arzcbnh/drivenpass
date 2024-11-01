@@ -38,7 +38,7 @@ function decryptAllPasswords(credentials: Credential[]) {
 async function editCredential(id: number, userId: number, form: CredentialForm) {
     const credential = await CredentialRepository.readById(userId, id);
 
-    if (credential == null) {
+    if (credential[0] == null) {
         throw new CredentialNotFoundError(id);
     }
 
