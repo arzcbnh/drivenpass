@@ -28,6 +28,12 @@ export class EmailNotFoundError extends NotFoundError {
     }
 }
 
+export class CredentialNotFoundError extends NotFoundError {
+    constructor(id: number) {
+        super(`Credential with ID '${id} not found.`);
+    }
+}
+
 export class UnauthorizedError extends Error {
     constructor(message: string) {
         super(message);
