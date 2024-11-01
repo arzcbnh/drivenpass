@@ -51,7 +51,7 @@ async function editCredential(id: number, userId: number, form: CredentialForm) 
 async function deleteCredential(userId: number, id: number) {
     const credential = await CredentialRepository.readById(userId, id);
 
-    if (credential == null) {
+    if (credential[0] == null) {
         throw new CredentialNotFoundError(id);
     }
 
