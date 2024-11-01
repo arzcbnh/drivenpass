@@ -1,6 +1,7 @@
 import { CredentialAlreadyExistsError, CredentialNotFoundError } from "#error";
 import { CredentialForm } from "#protocols";
 import { CredentialRepository } from "#repositories";
+import { Credential } from "@prisma/client";
 import { EncryptionService } from "./encryption.service.js";
 
 async function createCredential(userId: number, form: CredentialForm) {
@@ -18,12 +19,20 @@ async function createCredential(userId: number, form: CredentialForm) {
 
 async function getAllCredentials(userId: number) {
     const credentials = await CredentialRepository.readByUserId(userId);
-    return credentials;
+    return decryptAllPasswords(credentials);
 }
 
 async function getCredential(userId: number, id: number) {
     const credential = await CredentialRepository.readById(userId, id);
-    return credential;
+    return decryptAllPasswords(credential);
+}
+
+function decryptAllPasswords(credentials: Credential[]) {
+    return credentials.map(credential => {
+        const { passwordHash, ...rest } = credential;
+        const password = EncryptionService.decrypt(passwordHash);
+        return { password, ...rest };
+    });
 }
 
 async function editCredential(id: number, userId: number, form: CredentialForm) {
