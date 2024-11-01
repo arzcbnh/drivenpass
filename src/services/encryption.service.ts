@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import Cryptr from "cryptr";
 
-const secret = process.env.CRYPTO_KEY!;
+const secret = process.env.SECRET!;
 const cryptr = new Cryptr(secret);
 
 function encrypt(str: string) {
