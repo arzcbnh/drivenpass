@@ -20,7 +20,12 @@ async function getCredential(req: Request, res: Response) {
     const id = Number(req.params.id);
     const user = res.locals.user as PublicUser;
     const credential = await CredentialService.getCredential(user.id, id);
-    res.send(credential);
+
+    if (credential[0] == null) {
+        res.sendStatus(httpStatus.NOT_FOUND);
+    } else {
+        res.send(credential);
+    }
 }
 
 async function putCredential(req: Request, res: Response) {
