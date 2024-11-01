@@ -5,7 +5,10 @@ import * as routes from "#routes";
 const app = express();
 app.use(json());
 
-Object.values(routes).forEach(route => app.use(route));
+app.use(routes.HealthRoute);
+app.use(routes.AuthRoute);
+app.use(routes.CredentialRoute);
+app.use(routes.EraseRoute);
 app.use(handleError);
 
 const port = process.env.PORT ?? 5000;
